@@ -12,6 +12,12 @@ return [
     | as required, but they're a perfect start for most applications.
     |
     */
+    'guards' => [
+        'api' => [
+            'driver' => 'sanctum',
+            'provider' => 'users',
+        ],
+    ],
 
     'defaults' => [
         'guard' => env('AUTH_GUARD', 'web'),

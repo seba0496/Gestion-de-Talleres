@@ -1,0 +1,4 @@
+Usuario Admin
+     "nombre": "fabiadmin",
+    "email": "fabioadmin@hotmail.com",
+    "password": "fabio123",
