@@ -21,13 +21,7 @@ class Taller extends Model
         'costo',
         'instructor_id',
     ];
-
-    // Si tu clave primaria no se llama 'id', DESCOMENTA Y AJUSTA esta línea:
-    // protected $primaryKey = 'nombre_de_tu_clave_primaria';
-
-    // Si tu tabla NO tiene las columnas 'created_at' y 'updated_at', DESCOMENTA esta línea:
-    // public $timestamps = false;
-
+   
 
     /**
      * Relación: Un taller pertenece a un instructor (muchos a uno).
