@@ -1,19 +1,14 @@
 <?php
-
 namespace App\Models;
-
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens; // Asegúrate de tener esto si usas Sanctum
-
 class Usuario extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-
     // Nombre de la tabla en la base de datos (por si no sigue la convención de pluralización en inglés)
     protected $table = 'usuarios';
-
     // Atributos que se pueden asignar masivamente (mass assignable)
     protected $fillable = [
         'nombre',
@@ -21,7 +16,6 @@ class Usuario extends Authenticatable
         'password',
         'rol',
     ];
-
     // Atributos que deben ser ocultados al serializar (ej. en respuestas JSON)
     protected $hidden = [
         'password',
@@ -33,7 +27,6 @@ class Usuario extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed', // Laravel 9+ automáticamente hashea
     ];
-
     /**
      * Relación: Un usuario puede ser un instructor (una a uno).
      */
@@ -41,7 +34,6 @@ class Usuario extends Authenticatable
     {
         return $this->hasOne(Instructor::class, 'usuario_id');
     }
-
     /**
      * Relación: Un usuario tiene muchas inscripciones (uno a muchos).
      */
@@ -49,7 +41,6 @@ class Usuario extends Authenticatable
     {
         return $this->hasMany(Inscripcion::class, 'usuario_id');
     }
-
     /**
      * Relación: Un usuario puede estar inscrito en muchos talleres (muchos a muchos a través de inscripciones).
      */
