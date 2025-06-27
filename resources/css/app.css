@@ -1,6 +1,8 @@
 @import 'tailwindcss';
 @import "tailwindcss";
-@plugin "flyonui";
+@plugin "flyonui"{
+    themes: soft --default, dark --prefersdark, gourmet ;
+}
 @import "flyonui/variants.css";
 @source "../node_modules/flyonui/flyonui.js";
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
