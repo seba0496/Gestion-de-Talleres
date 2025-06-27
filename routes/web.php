@@ -1,6 +1,5 @@
 <?php
 
-<<<<<<< HEAD
 
 
 use Illuminate\Support\Facades\Route;
@@ -10,15 +9,14 @@ use App\Http\Controllers\Web\TallerWebController;
 use App\Http\Controllers\Web\InstructorWebController;
 use App\Http\Controllers\Web\DashboardController; // ¡Nuevo controlador!
 use App\Models\Usuario;
-=======
-use Illuminate\Support\Facades\Route;
 use App\Livewire\Prueba;
->>>>>>> 3c34eb48e763549c6f42f17bc092f572678da9b7
+use App\Livewire\Cuenta;
+use App\Livewire\Talleres;
+
 Route::get('/', function () {
     return view('welcome');
 });
 
-<<<<<<< HEAD
 Route::resource('/users', UserController::class);
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
@@ -41,9 +39,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/instructores/{instructor}/edit', [InstructorWebController::class, 'edit'])->name('instructores.edit');
     Route::get('/instructores/{instructor}', [InstructorWebController::class, 'show'])->name('instructores.show');
 
+
+});
     // ... (otras rutas protegidas) ...
-=======
 Route::get('/test', function () {
     return view('livewire.prueba');
->>>>>>> 3c34eb48e763549c6f42f17bc092f572678da9b7
 });
+Route::get('/cuenta', Cuenta::class)->name('cuenta');
+Route::get('/taller', Talleres::class)->name('talleres');
