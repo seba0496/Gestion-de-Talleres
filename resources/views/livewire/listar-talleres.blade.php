@@ -58,6 +58,40 @@
             </div>
         </div>
 
+        <div class="mt-12">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Lista de Todos los Talleres</h2>
+            @if(isset($talleres) && $talleres->count())
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white border border-gray-200">
+                        <thead>
+                            <tr class="bg-gray-50 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                <th class="py-3 px-4 border-b border-gray-200">Nombre</th>
+                                <th class="py-3 px-4 border-b border-gray-200">Descripción</th>
+                                <th class="py-3 px-4 border-b border-gray-200">Horario</th>
+                                <th class="py-3 px-4 border-b border-gray-200">Cupo Máximo</th>
+                                <th class="py-3 px-4 border-b border-gray-200">Costo</th>
+                                <th class="py-3 px-4 border-b border-gray-200">Instructor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($talleres as $taller)
+                                <tr class="hover:bg-gray-50 border-b border-gray-200">
+                                    <td class="py-3 px-4 text-sm text-gray-700">{{ $taller->nombre }}</td>
+                                    <td class="py-3 px-4 text-sm text-gray-700">{{ $taller->descripcion }}</td>
+                                    <td class="py-3 px-4 text-sm text-gray-700">{{ $taller->horario }}</td>
+                                    <td class="py-3 px-4 text-sm text-gray-700">{{ $taller->cupo_maximo }}</td>
+                                    <td class="py-3 px-4 text-sm text-gray-700">${{ number_format($taller->costo, 2) }}</td>
+                                    <td class="py-3 px-4 text-sm text-gray-700">{{ $taller->instructor->nombre ?? '-' }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            @else
+                <p class="text-gray-600 text-center text-lg">No hay talleres registrados.</p>
+            @endif
+        </div>
+
         <div class="mt-8">
             <a href="{{ route('users.index') }}" class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-200 mr-4">
                 Ver Usuarios

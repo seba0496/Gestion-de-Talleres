@@ -35,7 +35,8 @@ class AuthController extends Controller
     {
         $credentials = $request->validate([
             'email' => 'required|email',
-            'password' => 'required',
+            'password' => 'required', 
+
         ]);
 
         if (Auth::attempt($credentials)) {
@@ -64,7 +65,8 @@ class AuthController extends Controller
     {
         $request->validate([
             'nombre' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:usuarios', // 'unique:usuarios' asume tu tabla de usuarios se llama 'usuarios'
+            'email' => 'required|string|email|max:255|unique:usuarios',
+             // 'unique:usuarios' asume tu tabla de usuarios se llama 'usuarios'
             'password' => 'required|string|min:8|confirmed',
             'rol' => ['required', 'string', 'in:administrador,instructor,estudiante'],
         ]);

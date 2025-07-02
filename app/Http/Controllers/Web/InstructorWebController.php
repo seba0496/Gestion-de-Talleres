@@ -4,47 +4,39 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Instructor;
+use App\Models\Usuario;
 
 class InstructorWebController extends Controller
 {
-    protected $apiBaseUrl;
-
-    public function __construct()
-    {
-        $this->apiBaseUrl = config('app.url') . '/api';
-    }
-
-    private function getApiToken()
-    {
-        return session('api_token');
-    }
-
     public function index()
     {
-        $token = $this->getApiToken();
-        if (!$token) { /* ...manejar sin token... */ }
-
-        try {
-            $response = Http::withToken($token)->get("{$this->apiBaseUrl}/instructores");
-            if ($response->successful()) {
-                $instructores = $response->json();
-            } else {
-                $instructores = [];
-                session()->flash('error', 'No se pudieron cargar los instructores: ' . $response->json('message', 'Error desconocido.'));
-            }
-        } catch (\Exception $e) {
-            session()->flash('error', 'Error de conexión con la API de instructores: ' . $e->getMessage());
-            $instructores = [];
-        }
-
-        return view('instructores.index', compact('instructores'));
+        $instructores = Instructor::all();
+        $usuarios = Usuario::where('rol', 'instructor')->get();
+        return view('instructores.index', compact('instructores', 'usuarios'));
     }
 
     public function create()
     {
         return view('instructores.create');
     }
-    // ... store, edit, update, show, destroy para instructores también harían peticiones a la API
+
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'nombre' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'especialidad' => 'nullable|string|max:255',
+            'usuario_id' => 'required|exists:usuarios,id',
+        ]);
+        Instructor::create($validated);
+        return redirect()->route('instructores.index')->with('success', 'Instructor creado exitosamente.');
+    }
+
+    public function destroy($id)
+    {
+        $instructor = Instructor::findOrFail($id);
+        $instructor->delete();
+        return redirect()->route('instructores.index')->with('success', 'Instructor eliminado exitosamente.');
+    }
 }
