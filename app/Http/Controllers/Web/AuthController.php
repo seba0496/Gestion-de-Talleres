@@ -78,7 +78,7 @@ class AuthController extends Controller
             'rol' => $request->rol,
         ]);
 
-        Auth::login($usuario);
+        #Auth::login($usuario);
 
         // REDIRECCIÓN AL DASHBOARD DESPUÉS DEL REGISTRO
         return redirect(route('dashboard'))->with('success', '¡Registro exitoso!');

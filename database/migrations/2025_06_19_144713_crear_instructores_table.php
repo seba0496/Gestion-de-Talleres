@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nombre');
             $table->string('email')->unique();
-            $table->text('biografia')->nullable(); // `nullable()` permite que sea nulo
+            $table->text('especialidad')->nullable(); // `nullable()` permite que sea nulo
             // Clave foránea que referencia `id` en la tabla `users`
             $table->foreignId('usuario_id')
                   ->unique() // Un usuario puede ser instructor una sola vez
